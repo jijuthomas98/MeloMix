@@ -7,6 +7,8 @@ sealed class AuthEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class AuthStatusChecked extends AuthEvent {}
+
 class SignUpWithEmailAndPassword extends AuthEvent {
   final String name;
   final String email;

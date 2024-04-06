@@ -14,7 +14,8 @@ class Melomix extends StatelessWidget {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<AuthBloc>(create: (_) => AuthBloc()),
+          BlocProvider<AuthBloc>(
+              create: (_) => AuthBloc()..add(AuthStatusChecked())),
         ],
         child: MaterialApp.router(
           title: AppStrings.appName,

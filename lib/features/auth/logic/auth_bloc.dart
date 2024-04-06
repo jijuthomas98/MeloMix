@@ -10,11 +10,24 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
+    on<AuthStatusChecked>(_onAuthStatusChecked);
     on<SignUpWithEmailAndPassword>(_onSignUpWithEmailAndPassword);
     on<LoginWithEmailAndPassword>(_onLoginWithEmailAndPassword);
+    on<Logout>(_onLogout);
   }
 
   final _firebaseAuth = FirebaseAuth.instance;
+
+  FutureOr<void> _onAuthStatusChecked(
+      AuthStatusChecked event, Emitter<AuthState> emit) async {
+    try {
+      _firebaseAuth.currentUser != null
+          ? emit(Authenticated(firebaseUser: _firebaseAuth.currentUser!))
+          : emit(UnAuthenticated());
+    } catch (e) {
+      emit(UnAuthenticated());
+    }
+  }
 
   FutureOr<void> _onSignUpWithEmailAndPassword(
       SignUpWithEmailAndPassword event, Emitter<AuthState> emit) async {
@@ -39,6 +52,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _onLoginWithEmailAndPassword(
       LoginWithEmailAndPassword event, Emitter<AuthState> emit) async {
+    emit(Authenticating());
     try {
       final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
         email: event.email,
@@ -53,6 +67,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       _handleAuthException(e);
     } catch (e) {
       emit(UnAuthenticated());
+    }
+  }
+
+  FutureOr<void> _onLogout(Logout event, Emitter<AuthState> emit) {
+    try {
+      _firebaseAuth.signOut();
+      emit(UnAuthenticated());
+    } on FirebaseAuthException catch (e) {
+      emit(Authenticating());
+      _handleAuthException(e);
     }
   }
 
