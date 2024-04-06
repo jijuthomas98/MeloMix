@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
+import 'package:melomix/features/auth/screen/widgets/melomix_hero.dart';
 import 'package:melomix/gen/assets.gen.dart';
 import 'package:melomix/utils/extensions/extensions.dart';
+import 'package:melomix/services/routers/app_routes.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -13,39 +15,17 @@ class AuthScreen extends StatelessWidget {
         child: Align(
           alignment: Alignment.center,
           child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
+            width: context.width * 0.8,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Hero(
-                  tag: 'melomix_intro',
-                  child: Column(
-                    children: [
-                      Assets.icon.appIconMonotone.svg(width: 60, height: 60),
-                      const SizedBox(height: 20),
-                      Text(
-                        'MeloMix',
-                        style:
-                            Theme.of(context).textTheme.headlineLarge?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: context.primaryColor,
-                                ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        'Millions of songs forever free',
-                        style:
-                            Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                  color: context.primaryColor.withOpacity(0.7),
-                                ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 36),
+                const MeloMixHero(),
+                SizedBox(height: context.height * 0.12),
                 OutlinedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    GoRouter.of(context)
+                        .goNamed(AppRoutes.emailPassword.name, extra: true);
+                  },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(
                         vertical: 12, horizontal: context.width * 0.2),
@@ -82,7 +62,10 @@ class AuthScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 FilledButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    GoRouter.of(context)
+                        .goNamed(AppRoutes.emailPassword.name, extra: false);
+                  },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(
                         vertical: 12, horizontal: context.width * 0.25),

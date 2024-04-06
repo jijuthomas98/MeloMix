@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "854352686169",
+    "project_id": "melomix-53081",
+    "storage_bucket": "melomix-53081.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854352686169:android:a7711e2f5255ecd6c9d548",
+        "android_client_info": {
+          "package_name": "com.example.melomix"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8MqcnjJh-MnvIRMy0KChwnduPv7sy1tk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
