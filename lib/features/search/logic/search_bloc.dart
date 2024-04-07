@@ -27,12 +27,17 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
   FutureOr<void> _onSearchForSongs(
       SearchForSongs event, Emitter<SearchState> emit) async {
+    emit(SongSearchLoading(state.searchFilter, SearchStatus.inProgress));
     try {
       List<Song> songs =
           await _searchRepository.searchForSongs(query: event.songName);
-      print(songs);
+      emit(SongSearchSuccessful(
+        searchFilter: state.searchFilter,
+        searchStatus: SearchStatus.completed,
+        songs: songs,
+      ));
     } catch (e) {
-      emit(SongSearchError(state.searchFilter, state.searchStatus));
+      emit(SongSearchError(state.searchFilter, SearchStatus.error));
     }
   }
 }
