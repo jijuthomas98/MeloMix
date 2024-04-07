@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:melomix/features/auth/logic/auth_bloc.dart';
 import 'package:melomix/features/auth/screen/widgets/melomix_hero.dart';
-import 'package:melomix/services/app_snackbar.dart';
 import 'package:melomix/services/routers/app_routes.dart';
 import 'package:melomix/utils/extensions/extensions.dart';
 import 'package:melomix/utils/input_field.dart';
@@ -52,7 +51,7 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                const MeloMixHero(),
+                const MeloMixHeroWidget(),
                 _buildForm(context),
                 _actionButton(),
               ],
@@ -74,9 +73,9 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
             if (widget.isSignUp) ...[
               Text(
                 'Name',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: context.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 8),
               FilledInputField(
@@ -92,9 +91,9 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
             ],
             Text(
               'Email',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: context.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 8),
             FilledInputField(
@@ -109,9 +108,9 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
             const SizedBox(height: 8),
             Text(
               'Password',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: context.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 8),
             FilledInputField(
@@ -179,9 +178,9 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
             },
             child: Text(
               widget.isSignUp ? 'Sign Up' : 'Login',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: context.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           );
         },

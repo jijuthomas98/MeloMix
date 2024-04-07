@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:melomix/gen/assets.gen.dart';
 import 'package:melomix/utils/extensions/extensions.dart';
 
-class MeloMixHero extends StatelessWidget {
-  const MeloMixHero({
+class MeloMixHeroWidget extends StatelessWidget {
+  const MeloMixHeroWidget({
     super.key,
   });
 
@@ -13,7 +13,7 @@ class MeloMixHero extends StatelessWidget {
       tag: 'melomix_intro',
       child: Column(
         children: [
-          Assets.icon.appIconMonotone.svg(width: 60, height: 60),
+          Assets.icon.appIcon.image(width: 60, height: 60),
           const SizedBox(height: 20),
           Text(
             'MeloMix',
