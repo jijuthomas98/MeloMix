@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:melomix/gen/assets.gen.dart';
-import 'package:melomix/utils/generate_greetings.dart';
 import 'package:melomix/utils/extensions/extensions.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Assets.icon.appIcon.image(width: 32, height: 32),
             const SizedBox(width: 10),
             Text(
-              generateGreeting(),
+              'Search',
               maxLines: 1,
               style: context.textTheme.titleLarge
                   ?.copyWith(fontWeight: FontWeight.bold),

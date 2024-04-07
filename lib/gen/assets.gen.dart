@@ -40,8 +40,6 @@ class $AssetsIconGen {
   /// File path: assets/icon/google.svg
   SvgGenImage get google => const SvgGenImage('assets/icon/google.svg');
 
-  $AssetsIconNavGen get nav => const $AssetsIconNavGen();
-
   /// File path: assets/icon/shuffle.svg
   SvgGenImage get shuffle => const SvgGenImage('assets/icon/shuffle.svg');
 
@@ -56,35 +54,6 @@ class $AssetsIconGen {
         google,
         shuffle
       ];
-}
-
-class $AssetsIconNavGen {
-  const $AssetsIconNavGen();
-
-  /// File path: assets/icon/nav/home.svg
-  SvgGenImage get home => const SvgGenImage('assets/icon/nav/home.svg');
-
-  /// File path: assets/icon/nav/home_selected.svg
-  SvgGenImage get homeSelected =>
-      const SvgGenImage('assets/icon/nav/home_selected.svg');
-
-  /// File path: assets/icon/nav/library.svg
-  SvgGenImage get library => const SvgGenImage('assets/icon/nav/library.svg');
-
-  /// File path: assets/icon/nav/library_selected.svg
-  SvgGenImage get librarySelected =>
-      const SvgGenImage('assets/icon/nav/library_selected.svg');
-
-  /// File path: assets/icon/nav/search.svg
-  SvgGenImage get search => const SvgGenImage('assets/icon/nav/search.svg');
-
-  /// File path: assets/icon/nav/search_selected.svg
-  SvgGenImage get searchSelected =>
-      const SvgGenImage('assets/icon/nav/search_selected.svg');
-
-  /// List of all assets
-  List<SvgGenImage> get values =>
-      [home, homeSelected, library, librarySelected, search, searchSelected];
 }
 
 class Assets {
