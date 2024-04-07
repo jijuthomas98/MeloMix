@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:melomix/features/auth/logic/auth_bloc.dart';
+import 'package:melomix/features/search/logic/search_bloc.dart';
 import 'package:melomix/utils/constants/strings.dart';
 import 'package:melomix/services/routers/router_config.dart';
 import 'package:melomix/utils/theme.dart';
@@ -15,7 +16,9 @@ class Melomix extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<AuthBloc>(
-              create: (_) => AuthBloc()..add(AuthStatusChecked())),
+            create: (_) => AuthBloc()..add(AuthStatusChecked()),
+          ),
+          BlocProvider<SearchBloc>(create: (_) => SearchBloc()),
         ],
         child: MaterialApp.router(
           title: AppStrings.appName,

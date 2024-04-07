@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:melomix/gen/assets.gen.dart';
-import 'package:melomix/utils/generate_greetings.dart';
 import 'package:melomix/utils/extensions/extensions.dart';
+import 'package:melomix/utils/generate_greetings.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
