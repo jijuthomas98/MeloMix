@@ -20,12 +20,17 @@ class Melomix extends StatelessWidget {
           ),
           BlocProvider<SearchBloc>(create: (_) => SearchBloc()),
         ],
-        child: MaterialApp.router(
-          title: AppStrings.appName,
-          theme: appTheme(),
-          themeMode: ThemeMode.dark,
-          routerConfig: routerConfig,
-          debugShowCheckedModeBanner: false,
+        child: BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
+            routerConfig.refresh();
+          },
+          child: MaterialApp.router(
+            title: AppStrings.appName,
+            theme: appTheme(),
+            themeMode: ThemeMode.dark,
+            routerConfig: routerConfig,
+            debugShowCheckedModeBanner: false,
+          ),
         ),
       ),
     );

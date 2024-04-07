@@ -13,6 +13,18 @@ import 'package:melomix/services/routers/app_routes.dart';
 final GoRouter routerConfig = GoRouter(
   initialLocation: AppRoutes.home.path,
   navigatorKey: rootNavigatorKey,
+  redirect: (context, state) async {
+    if (state.fullPath == AppRoutes.home.path) {
+      //TODO: find better approch to redirect auth
+      var authBloc = context.read<AuthBloc>();
+      var currentState = authBloc.state;
+      return currentState is Authenticated
+          ? AppRoutes.home.path
+          : AppRoutes.auth.path;
+    } else {
+      return null;
+    }
+  },
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
@@ -27,13 +39,6 @@ final GoRouter routerConfig = GoRouter(
               name: AppRoutes.home.name,
               pageBuilder: (_, __) =>
                   const NoTransitionPage(child: HomeScreen()),
-              redirect: (context, state) async {
-                var authBloc = context.read<AuthBloc>();
-                var currentState = authBloc.state;
-                return currentState is Authenticated
-                    ? AppRoutes.home.path
-                    : AppRoutes.auth.path;
-              },
             )
           ],
         ),
