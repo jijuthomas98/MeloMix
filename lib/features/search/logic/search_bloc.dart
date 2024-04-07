@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:melomix/features/search/data/enums.dart';
+import 'package:melomix/features/search/data/model/enums.dart';
 
 part 'search_event.dart';
 part 'search_state.dart';
