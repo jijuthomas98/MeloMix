@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:melomix/features/search/data/model/enums.dart';
+import 'package:melomix/features/search/data/enums.dart';
 import 'package:melomix/features/search/logic/search_bloc.dart';
 import 'package:melomix/utils/extensions/extensions.dart';
 

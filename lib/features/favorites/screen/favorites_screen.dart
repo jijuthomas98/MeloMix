@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:melomix/features/search/logic/search_bloc.dart';
 import 'package:melomix/gen/assets.gen.dart';
 import 'package:melomix/utils/extensions/extensions.dart';
 
@@ -31,7 +33,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           IconButton(
             iconSize: 30,
             icon: const Icon(Icons.settings_outlined),
-            onPressed: () {},
+            onPressed: () {
+              context
+                  .read<SearchBloc>()
+                  .add(SearchForSongs(songName: 'Believer'));
+            },
           ),
         ],
       ),

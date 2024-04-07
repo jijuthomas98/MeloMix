@@ -12,3 +12,9 @@ class UpdateSearchFilter extends SearchEvent {
 
   const UpdateSearchFilter({required this.searchFilter});
 }
+
+class SearchForSongs extends SearchEvent {
+  final String songName;
+
+  const SearchForSongs({required this.songName});
+}
