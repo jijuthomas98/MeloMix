@@ -306,7 +306,7 @@ class __$$SongImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SongImpl implements _Song {
+class _$SongImpl extends _Song {
   _$SongImpl(
       {required this.id,
       required this.name,
@@ -325,7 +325,8 @@ class _$SongImpl implements _Song {
       final List<Image>? image,
       required final List<DownloadUrl> downloadUrl})
       : _image = image,
-        _downloadUrl = downloadUrl;
+        _downloadUrl = downloadUrl,
+        super._();
 
   factory _$SongImpl.fromJson(Map<String, dynamic> json) =>
       _$$SongImplFromJson(json);
@@ -447,7 +448,7 @@ class _$SongImpl implements _Song {
   }
 }
 
-abstract class _Song implements Song {
+abstract class _Song extends Song {
   factory _Song(
       {required final String id,
       required final String name,
@@ -465,6 +466,7 @@ abstract class _Song implements Song {
       final Album? album,
       final List<Image>? image,
       required final List<DownloadUrl> downloadUrl}) = _$SongImpl;
+  _Song._() : super._();
 
   factory _Song.fromJson(Map<String, dynamic> json) = _$SongImpl.fromJson;
 

@@ -7,19 +7,8 @@
         {
             "name": "melomix",
             "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "melomix (profile mode)",
-            "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "melomix (release mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
+            "program": "lib/main.dart"
         }
     ]
 }

@@ -8,6 +8,7 @@ part 'song.g.dart';
 
 @freezed
 class Song with _$Song {
+  const Song._();
   factory Song({
     required String id,
     required String name,
@@ -28,4 +29,22 @@ class Song with _$Song {
   }) = _Song;
 
   factory Song.fromJson(Map<String, dynamic> json) => _$SongFromJson(json);
+
+  String? getLowQualityImageUrl() {
+    var lowQualityImage =
+        image?.where((image) => image.quality == "50x50").first;
+    return lowQualityImage?.url;
+  }
+
+  String? getMediumQualityImageUrl() {
+    var mediumQualityImage =
+        image?.where((image) => image.quality == "150x150").first;
+    return mediumQualityImage?.url;
+  }
+
+  String? getHighQualityImageUrl() {
+    var highQualityImage =
+        image?.where((image) => image.quality == "500x500").first;
+    return highQualityImage?.url;
+  }
 }

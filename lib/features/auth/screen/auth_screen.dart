@@ -37,22 +37,15 @@ class AuthScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 8),
-                ElevatedButton.icon(
-                  icon: Assets.icon.google.svg(width: 24, height: 24),
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 12, horizontal: 16),
+                const SizedBox(height: 20),
+                Text(
+                  "or",
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
                   ),
-                  label: Text(
-                    "Continue with Google",
-                    style: context.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 20),
                 Text(
                   "Existing user ?",
                   style: context.textTheme.bodyMedium?.copyWith(
