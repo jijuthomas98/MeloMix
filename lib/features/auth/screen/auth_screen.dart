@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:melomix/features/auth/screen/widgets/melomix_hero.dart';
-import 'package:melomix/gen/assets.gen.dart';
 import 'package:melomix/utils/extensions/extensions.dart';
 import 'package:melomix/services/routers/app_routes.dart';
 

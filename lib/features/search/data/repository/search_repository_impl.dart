@@ -19,7 +19,7 @@ class SearchRepositoryImpl implements SearchRepository {
         'limit': limit ?? 10, // Use limit value if provided, otherwise use 10
       });
 
-      if (response != null) {
+      if (response != null && response['results'] != null) {
         final List<dynamic> songJsonList = response['results'];
         final List<Song> songs =
             songJsonList.map((json) => Song.fromJson(json)).toList();

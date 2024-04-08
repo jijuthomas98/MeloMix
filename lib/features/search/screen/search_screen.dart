@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:melomix/features/search/data/enums.dart';
 import 'package:melomix/features/search/logic/search_bloc.dart';
 import 'package:melomix/features/search/screen/widget/search_and_filter_persistent_delegate.dart';
 import 'package:melomix/features/search/screen/widget/song_item_widget.dart';
@@ -24,7 +25,8 @@ class SearchScreen extends StatelessWidget {
               ),
               BlocBuilder<SearchBloc, SearchState>(
                 builder: (context, state) {
-                  if (state is SongSearchSuccessful) {
+                  if (state.songs.isNotEmpty &&
+                      state.searchFilter == SearchFilter.songs) {
                     return SliverList.builder(
                       itemCount: state.songs.length,
                       itemBuilder: (context, index) {
