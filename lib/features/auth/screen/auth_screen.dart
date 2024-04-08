@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:melomix/features/auth/screen/widgets/melomix_hero.dart';
-import 'package:melomix/gen/assets.gen.dart';
 import 'package:melomix/utils/extensions/extensions.dart';
 import 'package:melomix/services/routers/app_routes.dart';
 
@@ -37,22 +36,15 @@ class AuthScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 8),
-                ElevatedButton.icon(
-                  icon: Assets.icon.google.svg(width: 24, height: 24),
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 12, horizontal: 16),
+                const SizedBox(height: 20),
+                Text(
+                  "or",
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
                   ),
-                  label: Text(
-                    "Continue with Google",
-                    style: context.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 20),
                 Text(
                   "Existing user ?",
                   style: context.textTheme.bodyMedium?.copyWith(

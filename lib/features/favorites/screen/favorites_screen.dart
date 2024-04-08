@@ -3,16 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:melomix/features/auth/logic/auth_bloc.dart';
 import 'package:melomix/gen/assets.gen.dart';
 import 'package:melomix/utils/extensions/extensions.dart';
-import 'package:melomix/utils/generate_greetings.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class FavoritesScreen extends StatefulWidget {
+  const FavoritesScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<FavoritesScreen> createState() => _FavoritesScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Assets.icon.appIcon.image(width: 32, height: 32),
             const SizedBox(width: 10),
             Text(
-              generateGreeting(),
+              'Favorites',
               maxLines: 1,
               style: context.textTheme.titleLarge
                   ?.copyWith(fontWeight: FontWeight.bold),

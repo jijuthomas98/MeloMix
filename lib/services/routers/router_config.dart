@@ -3,14 +3,69 @@ import 'package:go_router/go_router.dart';
 import 'package:melomix/features/auth/logic/auth_bloc.dart';
 import 'package:melomix/features/auth/screen/auth_screen.dart';
 import 'package:melomix/features/auth/screen/email_password_screen.dart';
+import 'package:melomix/features/favorites/screen/favorites_screen.dart';
 import 'package:melomix/features/home/screen/home_screen.dart';
+import 'package:melomix/features/search/screen/search_screen.dart';
+import 'package:melomix/services/scaffold_with_nav_bar.dart';
 import 'package:melomix/utils/keys.dart';
 import 'package:melomix/services/routers/app_routes.dart';
 
 final GoRouter routerConfig = GoRouter(
   initialLocation: AppRoutes.home.path,
   navigatorKey: rootNavigatorKey,
+  redirect: (context, state) async {
+    if (state.fullPath == AppRoutes.home.path) {
+      //TODO: find better approch to redirect auth
+      var authBloc = context.read<AuthBloc>();
+      var currentState = authBloc.state;
+      return currentState is Authenticated
+          ? AppRoutes.home.path
+          : AppRoutes.auth.path;
+    } else {
+      return null;
+    }
+  },
   routes: [
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+        return ScaffoldWithNavBar(navigationShell: navigationShell);
+      },
+      branches: [
+        StatefulShellBranch(
+          navigatorKey: homeNavigatorKey,
+          routes: [
+            GoRoute(
+              path: AppRoutes.home.path,
+              name: AppRoutes.home.name,
+              pageBuilder: (_, __) =>
+                  const NoTransitionPage(child: HomeScreen()),
+            )
+          ],
+        ),
+        StatefulShellBranch(
+          navigatorKey: searchNavigatorKey,
+          routes: [
+            GoRoute(
+              path: AppRoutes.search.path,
+              name: AppRoutes.search.name,
+              pageBuilder: (_, __) =>
+                  const NoTransitionPage(child: SearchScreen()),
+            )
+          ],
+        ),
+        StatefulShellBranch(
+          navigatorKey: favoritesNavigatorKey,
+          routes: [
+            GoRoute(
+              path: AppRoutes.favorite.path,
+              name: AppRoutes.favorite.name,
+              pageBuilder: (_, __) =>
+                  const NoTransitionPage(child: FavoritesScreen()),
+            )
+          ],
+        ),
+      ],
+    ),
     GoRoute(
       parentNavigatorKey: rootNavigatorKey,
       path: AppRoutes.auth.path,
@@ -29,19 +84,6 @@ final GoRouter routerConfig = GoRouter(
           },
         ),
       ],
-    ),
-    GoRoute(
-      parentNavigatorKey: rootNavigatorKey,
-      path: AppRoutes.home.path,
-      name: AppRoutes.home.name,
-      builder: (_, state) => const HomeScreen(),
-      redirect: (context, state) async {
-        var authBloc = context.read<AuthBloc>();
-        var currentState = authBloc.state;
-        return currentState is Authenticated
-            ? AppRoutes.home.path
-            : AppRoutes.auth.path;
-      },
     ),
   ],
 );
