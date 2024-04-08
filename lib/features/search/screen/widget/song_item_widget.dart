@@ -18,12 +18,12 @@ class SongItemWidget extends StatelessWidget {
 
   Widget _buildLeading() {
     return CachedNetworkImage(
-      imageUrl: song.getLowQualityImageUrl() ?? '',
-      height: 56,
-      width: 56,
+      imageUrl: song.getMediumQualityImageUrl() ?? '',
+      height: 60,
+      width: 60,
       errorWidget: (context, url, error) {
         return const SizedBox.square(
-          dimension: 56,
+          dimension: 60,
           child: Icon(Icons.music_note),
         );
       },
@@ -51,7 +51,7 @@ class SongItemWidget extends StatelessWidget {
   Widget _buildSubtitle(BuildContext context) {
     return Text(
       song.album!.name,
-      style: context.textTheme.titleMedium,
+      style: context.textTheme.bodyMedium,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     );

@@ -15,8 +15,8 @@ class SearchRepositoryImpl implements SearchRepository {
       final response =
           await _httpService.get('/search/songs', queryParameters: {
         'query': query,
-        'page': page ?? 0, // Use page value if provided, otherwise use 0
-        'limit': limit ?? 10, // Use limit value if provided, otherwise use 10
+        'page': page ?? 0,
+        'limit': limit ?? 20,
       });
 
       if (response != null && response['results'] != null) {

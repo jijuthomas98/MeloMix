@@ -13,32 +13,29 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: CustomScrollView(
-            slivers: [
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: SearchAndFilterHeaderPersistentDelegate(
-                  padding: context.padding,
-                ),
+        child: CustomScrollView(
+          slivers: [
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: SearchAndFilterHeaderPersistentDelegate(
+                padding: context.padding,
               ),
-              BlocBuilder<SearchBloc, SearchState>(
-                builder: (context, state) {
-                  if (state.songs.isNotEmpty &&
-                      state.searchFilter == SearchFilter.songs) {
-                    return SliverList.builder(
-                      itemCount: state.songs.length,
-                      itemBuilder: (context, index) {
-                        return SongItemWidget(song: state.songs[index]);
-                      },
-                    );
-                  }
-                  return const SliverToBoxAdapter(child: Text('data'));
-                },
-              )
-            ],
-          ),
+            ),
+            BlocBuilder<SearchBloc, SearchState>(
+              builder: (context, state) {
+                if (state.songs.isNotEmpty &&
+                    state.searchFilter == SearchFilter.songs) {
+                  return SliverList.builder(
+                    itemCount: state.songs.length,
+                    itemBuilder: (context, index) {
+                      return SongItemWidget(song: state.songs[index]);
+                    },
+                  );
+                }
+                return const SliverToBoxAdapter(child: Text('data'));
+              },
+            )
+          ],
         ),
       ),
     );
