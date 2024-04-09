@@ -1,15 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:melomix/services/app_snackbar.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
+part 'auth_bloc.freezed.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc() : super(AuthInitial()) {
+  AuthBloc() : super(const AuthState.initial()) {
     on<AuthStatusChecked>(_onAuthStatusChecked);
     on<SignUpWithEmailAndPassword>(_onSignUpWithEmailAndPassword);
     on<LoginWithEmailAndPassword>(_onLoginWithEmailAndPassword);
@@ -23,15 +23,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       _firebaseAuth.currentUser != null
           ? emit(Authenticated(firebaseUser: _firebaseAuth.currentUser!))
-          : emit(UnAuthenticated());
+          : emit(const UnAuthenticated());
     } catch (e) {
-      emit(UnAuthenticated());
+      emit(const UnAuthenticated());
     }
   }
 
   FutureOr<void> _onSignUpWithEmailAndPassword(
       SignUpWithEmailAndPassword event, Emitter<AuthState> emit) async {
-    emit(Authenticating());
+    emit(const Authenticating());
     try {
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
         email: event.email,
@@ -43,16 +43,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(Authenticated(firebaseUser: userCredential.user!));
       }
     } on FirebaseAuthException catch (e) {
-      emit(UnAuthenticated());
-      _handleAuthException(e);
+      emit(AuthException(e));
     } catch (e) {
-      emit(UnAuthenticated());
+      emit(const AuthException());
     }
   }
 
   FutureOr<void> _onLoginWithEmailAndPassword(
       LoginWithEmailAndPassword event, Emitter<AuthState> emit) async {
-    emit(Authenticating());
+    emit(const Authenticating());
     try {
       final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
         email: event.email,
@@ -63,42 +62,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(Authenticated(firebaseUser: userCredential.user!));
       }
     } on FirebaseAuthException catch (e) {
-      emit(UnAuthenticated());
-      _handleAuthException(e);
+      emit(AuthException(e));
     } catch (e) {
-      emit(UnAuthenticated());
+      emit(const AuthException());
     }
   }
 
-  FutureOr<void> _onLogout(Logout event, Emitter<AuthState> emit) {
+  FutureOr<void> _onLogout(Logout event, Emitter<AuthState> emit) async {
     try {
-      _firebaseAuth.signOut();
-      emit(UnAuthenticated());
+      await _firebaseAuth.signOut();
+      emit(const UnAuthenticated());
     } on FirebaseAuthException catch (e) {
-      emit(Authenticating());
-      _handleAuthException(e);
+      emit(AuthException(e));
+    } catch (e) {
+      emit(const AuthException());
     }
-  }
-
-  void _handleAuthException(FirebaseAuthException exception) {
-    final message = switch (exception.code) {
-      'invalid-email' => 'The email address is not valid.',
-      'user-disabled' =>
-        'The user corresponding to the given email has been disabled.',
-      'user-not-found' =>
-        'The user corresponding to the given email does not exist.',
-      'wrong-password' =>
-        'The password is invalid for the given email, or the account corresponding to the email does not have a password set.',
-      'email-already-in-use' =>
-        'The email address is already in use by another account.',
-      'operation-not-allowed' =>
-        'Indicates that Email & Password accounts are not enabled.',
-      'weak-password' => 'The password must be 6 characters long or more.',
-      'credential-already-in-use' =>
-        'This credential is already associated with a different user account.',
-      (_) => 'An undefined Error, please check your email and password.'
-    };
-
-    AppSnackbar.show(message);
   }
 }

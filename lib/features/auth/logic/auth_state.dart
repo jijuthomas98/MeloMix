@@ -1,27 +1,12 @@
 part of 'auth_bloc.dart';
 
-sealed class AuthState extends Equatable {
-  const AuthState();
-
-  @override
-  List<Object> get props => [];
-}
-
-final class AuthInitial extends AuthState {}
-
-final class UnAuthenticated extends AuthState {}
-
-final class Authenticating extends AuthState {}
-
-final class Authenticated extends AuthState {
-  final User firebaseUser;
-
-  const Authenticated({required this.firebaseUser});
-
-  Authenticated copyWith({User? firebaseUser}) {
-    return Authenticated(firebaseUser: firebaseUser ?? this.firebaseUser);
-  }
-
-  @override
-  List<Object> get props => [firebaseUser];
+@freezed
+class AuthState with _$AuthState {
+  const factory AuthState.initial() = Initial;
+  const factory AuthState.unAuthenticated() = UnAuthenticated;
+  const factory AuthState.authenticating() = Authenticating;
+  const factory AuthState.authException([FirebaseAuthException? exception]) =
+      AuthException;
+  const factory AuthState.authenticated({required User firebaseUser}) =
+      Authenticated;
 }

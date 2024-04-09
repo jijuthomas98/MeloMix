@@ -34,7 +34,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             iconSize: 30,
             icon: const Icon(Icons.settings_outlined),
             onPressed: () {
-              context.read<AuthBloc>().add(Logout());
+              context.read<AuthBloc>().add(const Logout());
             },
           ),
         ],

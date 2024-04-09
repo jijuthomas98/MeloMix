@@ -25,7 +25,7 @@ class Melomix extends StatelessWidget {
         child: MultiBlocProvider(
           providers: [
             BlocProvider<AuthBloc>(
-              create: (_) => AuthBloc()..add(AuthStatusChecked()),
+              create: (_) => AuthBloc()..add(const AuthStatusChecked()),
             ),
             BlocProvider<SearchBloc>(
               create: (context) => SearchBloc(

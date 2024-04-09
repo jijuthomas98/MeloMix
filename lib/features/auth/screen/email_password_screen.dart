@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:melomix/features/auth/logic/auth_bloc.dart';
 import 'package:melomix/features/auth/screen/widgets/melomix_hero.dart';
+import 'package:melomix/services/app_snackbar.dart';
 import 'package:melomix/services/routers/app_routes.dart';
 import 'package:melomix/utils/extensions/extensions.dart';
 import 'package:melomix/utils/input_field.dart';
@@ -149,6 +150,8 @@ class _EmailPasswordScreenState extends State<EmailPasswordScreen> {
         listener: (context, state) {
           if (state is Authenticated) {
             GoRouter.of(context).goNamed(AppRoutes.home.name);
+          } else if (state is AuthException) {
+            AppSnackbar.showAuthExpection(state.exception);
           }
         },
         builder: (context, state) {
