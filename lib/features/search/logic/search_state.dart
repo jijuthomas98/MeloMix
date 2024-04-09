@@ -2,26 +2,35 @@ part of 'search_bloc.dart';
 
 enum SearchStatus { idle, inProgress, completed, error }
 
-sealed class SearchState extends Equatable {
-  final SearchFilter searchFilter;
-  final SearchStatus searchStatus;
-  final List<Song> songs;
+@freezed
+class SearchState with _$SearchState {
+  const factory SearchState({
+    required SearchFilter searchFilter,
+    required SearchStatus searchStatus,
+    required List<Song> songs,
+  }) = _SearchState;
 
-  const SearchState(this.searchFilter, this.searchStatus, this.songs);
+  factory SearchState.initial() => const SearchState(
+        searchFilter: SearchFilter.songs,
+        searchStatus: SearchStatus.idle,
+        songs: [],
+      );
 
-  @override
-  List<Object?> get props => [searchFilter, searchStatus, songs];
-}
+  const SearchState._();
 
-class SearchInitial extends SearchState {
-  const SearchInitial(super.searchFilter, super.searchStatus, super.songs);
-}
+  factory SearchState.filterUpdated(
+    SearchState state, {
+    required SearchFilter searchFilter,
+  }) =>
+      state.copyWith(searchFilter: searchFilter);
 
-class SearchFilterUpdated extends SearchState {
-  const SearchFilterUpdated(
-      super.searchFilter, super.searchStatus, super.songs);
-}
-
-class SearchItemUpdate extends SearchState {
-  const SearchItemUpdate(super.searchFilter, super.searchStatus, super.songs);
+  factory SearchState.itemUpdated(
+    SearchState state, {
+    required List<Song> songs,
+    required SearchStatus searchStatus,
+  }) =>
+      state.copyWith(
+        songs: songs,
+        searchStatus: searchStatus,
+      );
 }
