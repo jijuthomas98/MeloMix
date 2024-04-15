@@ -21,22 +21,6 @@ class SearchAndFilterHeaderPersistentDelegate
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(
-            child: AnimatedOpacity(
-              opacity: searchBarOpacity,
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.easeOut,
-              child: Row(
-                children: [
-                  Text(
-                    "Search",
-                    style: context.textTheme.titleLarge
-                        ?.copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-          ),
           const SizedBox(
             height: 8,
           ),
@@ -71,8 +55,11 @@ class SearchAndFilterHeaderPersistentDelegate
                   padding: EdgeInsets.zero,
                   child: BlocBuilder<SearchBloc, SearchState>(
                     builder: (context, state) {
-                      return FilterChip(
+                      return ChoiceChip(
                         label: Text(SearchFilter.allFilters()[index]),
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
                         onSelected: (selected) {
                           context.read<SearchBloc>().add(
                                 UpdateSearchFilter(

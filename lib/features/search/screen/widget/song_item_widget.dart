@@ -16,7 +16,7 @@ class SongItemWidget extends StatelessWidget {
       title: _buildTitle(context),
       subtitle: _buildSubtitle(context),
       onTap: () {
-        context.read<MusicPlayerBloc>().add(const MusicPlayerEvent.play());
+        context.read<MusicPlayerBloc>().add(const Play());
       },
     );
   }
