@@ -13,9 +13,6 @@ class SearchAndFilterHeaderPersistentDelegate
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    final progress = shrinkOffset / maxExtent;
-    final searchBarOpacity = 1 - progress;
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18),
       child: Column(
