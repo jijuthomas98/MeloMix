@@ -19,22 +19,25 @@ mixin _$MusicPlayerEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() halfCollapse,
-    required TResult Function() play,
+    required TResult Function(Song song) play,
     required TResult Function() stop,
+    required TResult Function() pause,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? halfCollapse,
-    TResult? Function()? play,
+    TResult? Function(Song song)? play,
     TResult? Function()? stop,
+    TResult? Function()? pause,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? halfCollapse,
-    TResult Function()? play,
+    TResult Function(Song song)? play,
     TResult Function()? stop,
+    TResult Function()? pause,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$MusicPlayerEvent {
     required TResult Function(HalfCollapse value) halfCollapse,
     required TResult Function(Play value) play,
     required TResult Function(Stop value) stop,
+    required TResult Function(Pause value) pause,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$MusicPlayerEvent {
     TResult? Function(HalfCollapse value)? halfCollapse,
     TResult? Function(Play value)? play,
     TResult? Function(Stop value)? stop,
+    TResult? Function(Pause value)? pause,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$MusicPlayerEvent {
     TResult Function(HalfCollapse value)? halfCollapse,
     TResult Function(Play value)? play,
     TResult Function(Stop value)? stop,
+    TResult Function(Pause value)? pause,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,8 +125,9 @@ class _$HalfCollapseImpl implements HalfCollapse {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() halfCollapse,
-    required TResult Function() play,
+    required TResult Function(Song song) play,
     required TResult Function() stop,
+    required TResult Function() pause,
   }) {
     return halfCollapse();
   }
@@ -129,8 +136,9 @@ class _$HalfCollapseImpl implements HalfCollapse {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? halfCollapse,
-    TResult? Function()? play,
+    TResult? Function(Song song)? play,
     TResult? Function()? stop,
+    TResult? Function()? pause,
   }) {
     return halfCollapse?.call();
   }
@@ -139,8 +147,9 @@ class _$HalfCollapseImpl implements HalfCollapse {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? halfCollapse,
-    TResult Function()? play,
+    TResult Function(Song song)? play,
     TResult Function()? stop,
+    TResult Function()? pause,
     required TResult orElse(),
   }) {
     if (halfCollapse != null) {
@@ -155,6 +164,7 @@ class _$HalfCollapseImpl implements HalfCollapse {
     required TResult Function(HalfCollapse value) halfCollapse,
     required TResult Function(Play value) play,
     required TResult Function(Stop value) stop,
+    required TResult Function(Pause value) pause,
   }) {
     return halfCollapse(this);
   }
@@ -165,6 +175,7 @@ class _$HalfCollapseImpl implements HalfCollapse {
     TResult? Function(HalfCollapse value)? halfCollapse,
     TResult? Function(Play value)? play,
     TResult? Function(Stop value)? stop,
+    TResult? Function(Pause value)? pause,
   }) {
     return halfCollapse?.call(this);
   }
@@ -175,6 +186,7 @@ class _$HalfCollapseImpl implements HalfCollapse {
     TResult Function(HalfCollapse value)? halfCollapse,
     TResult Function(Play value)? play,
     TResult Function(Stop value)? stop,
+    TResult Function(Pause value)? pause,
     required TResult orElse(),
   }) {
     if (halfCollapse != null) {
@@ -193,6 +205,10 @@ abstract class _$$PlayImplCopyWith<$Res> {
   factory _$$PlayImplCopyWith(
           _$PlayImpl value, $Res Function(_$PlayImpl) then) =
       __$$PlayImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Song song});
+
+  $SongCopyWith<$Res> get song;
 }
 
 /// @nodoc
@@ -201,57 +217,92 @@ class __$$PlayImplCopyWithImpl<$Res>
     implements _$$PlayImplCopyWith<$Res> {
   __$$PlayImplCopyWithImpl(_$PlayImpl _value, $Res Function(_$PlayImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? song = null,
+  }) {
+    return _then(_$PlayImpl(
+      song: null == song
+          ? _value.song
+          : song // ignore: cast_nullable_to_non_nullable
+              as Song,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SongCopyWith<$Res> get song {
+    return $SongCopyWith<$Res>(_value.song, (value) {
+      return _then(_value.copyWith(song: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$PlayImpl implements Play {
-  const _$PlayImpl();
+  const _$PlayImpl({required this.song});
+
+  @override
+  final Song song;
 
   @override
   String toString() {
-    return 'MusicPlayerEvent.play()';
+    return 'MusicPlayerEvent.play(song: $song)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$PlayImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$PlayImpl &&
+            (identical(other.song, song) || other.song == song));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, song);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PlayImplCopyWith<_$PlayImpl> get copyWith =>
+      __$$PlayImplCopyWithImpl<_$PlayImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() halfCollapse,
-    required TResult Function() play,
+    required TResult Function(Song song) play,
     required TResult Function() stop,
+    required TResult Function() pause,
   }) {
-    return play();
+    return play(song);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? halfCollapse,
-    TResult? Function()? play,
+    TResult? Function(Song song)? play,
     TResult? Function()? stop,
+    TResult? Function()? pause,
   }) {
-    return play?.call();
+    return play?.call(song);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? halfCollapse,
-    TResult Function()? play,
+    TResult Function(Song song)? play,
     TResult Function()? stop,
+    TResult Function()? pause,
     required TResult orElse(),
   }) {
     if (play != null) {
-      return play();
+      return play(song);
     }
     return orElse();
   }
@@ -262,6 +313,7 @@ class _$PlayImpl implements Play {
     required TResult Function(HalfCollapse value) halfCollapse,
     required TResult Function(Play value) play,
     required TResult Function(Stop value) stop,
+    required TResult Function(Pause value) pause,
   }) {
     return play(this);
   }
@@ -272,6 +324,7 @@ class _$PlayImpl implements Play {
     TResult? Function(HalfCollapse value)? halfCollapse,
     TResult? Function(Play value)? play,
     TResult? Function(Stop value)? stop,
+    TResult? Function(Pause value)? pause,
   }) {
     return play?.call(this);
   }
@@ -282,6 +335,7 @@ class _$PlayImpl implements Play {
     TResult Function(HalfCollapse value)? halfCollapse,
     TResult Function(Play value)? play,
     TResult Function(Stop value)? stop,
+    TResult Function(Pause value)? pause,
     required TResult orElse(),
   }) {
     if (play != null) {
@@ -292,7 +346,12 @@ class _$PlayImpl implements Play {
 }
 
 abstract class Play implements MusicPlayerEvent {
-  const factory Play() = _$PlayImpl;
+  const factory Play({required final Song song}) = _$PlayImpl;
+
+  Song get song;
+  @JsonKey(ignore: true)
+  _$$PlayImplCopyWith<_$PlayImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -333,8 +392,9 @@ class _$StopImpl implements Stop {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() halfCollapse,
-    required TResult Function() play,
+    required TResult Function(Song song) play,
     required TResult Function() stop,
+    required TResult Function() pause,
   }) {
     return stop();
   }
@@ -343,8 +403,9 @@ class _$StopImpl implements Stop {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? halfCollapse,
-    TResult? Function()? play,
+    TResult? Function(Song song)? play,
     TResult? Function()? stop,
+    TResult? Function()? pause,
   }) {
     return stop?.call();
   }
@@ -353,8 +414,9 @@ class _$StopImpl implements Stop {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? halfCollapse,
-    TResult Function()? play,
+    TResult Function(Song song)? play,
     TResult Function()? stop,
+    TResult Function()? pause,
     required TResult orElse(),
   }) {
     if (stop != null) {
@@ -369,6 +431,7 @@ class _$StopImpl implements Stop {
     required TResult Function(HalfCollapse value) halfCollapse,
     required TResult Function(Play value) play,
     required TResult Function(Stop value) stop,
+    required TResult Function(Pause value) pause,
   }) {
     return stop(this);
   }
@@ -379,6 +442,7 @@ class _$StopImpl implements Stop {
     TResult? Function(HalfCollapse value)? halfCollapse,
     TResult? Function(Play value)? play,
     TResult? Function(Stop value)? stop,
+    TResult? Function(Pause value)? pause,
   }) {
     return stop?.call(this);
   }
@@ -389,6 +453,7 @@ class _$StopImpl implements Stop {
     TResult Function(HalfCollapse value)? halfCollapse,
     TResult Function(Play value)? play,
     TResult Function(Stop value)? stop,
+    TResult Function(Pause value)? pause,
     required TResult orElse(),
   }) {
     if (stop != null) {
@@ -403,10 +468,126 @@ abstract class Stop implements MusicPlayerEvent {
 }
 
 /// @nodoc
+abstract class _$$PauseImplCopyWith<$Res> {
+  factory _$$PauseImplCopyWith(
+          _$PauseImpl value, $Res Function(_$PauseImpl) then) =
+      __$$PauseImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$PauseImplCopyWithImpl<$Res>
+    extends _$MusicPlayerEventCopyWithImpl<$Res, _$PauseImpl>
+    implements _$$PauseImplCopyWith<$Res> {
+  __$$PauseImplCopyWithImpl(
+      _$PauseImpl _value, $Res Function(_$PauseImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$PauseImpl implements Pause {
+  const _$PauseImpl();
+
+  @override
+  String toString() {
+    return 'MusicPlayerEvent.pause()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$PauseImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() halfCollapse,
+    required TResult Function(Song song) play,
+    required TResult Function() stop,
+    required TResult Function() pause,
+  }) {
+    return pause();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? halfCollapse,
+    TResult? Function(Song song)? play,
+    TResult? Function()? stop,
+    TResult? Function()? pause,
+  }) {
+    return pause?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? halfCollapse,
+    TResult Function(Song song)? play,
+    TResult Function()? stop,
+    TResult Function()? pause,
+    required TResult orElse(),
+  }) {
+    if (pause != null) {
+      return pause();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HalfCollapse value) halfCollapse,
+    required TResult Function(Play value) play,
+    required TResult Function(Stop value) stop,
+    required TResult Function(Pause value) pause,
+  }) {
+    return pause(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(HalfCollapse value)? halfCollapse,
+    TResult? Function(Play value)? play,
+    TResult? Function(Stop value)? stop,
+    TResult? Function(Pause value)? pause,
+  }) {
+    return pause?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HalfCollapse value)? halfCollapse,
+    TResult Function(Play value)? play,
+    TResult Function(Stop value)? stop,
+    TResult Function(Pause value)? pause,
+    required TResult orElse(),
+  }) {
+    if (pause != null) {
+      return pause(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Pause implements MusicPlayerEvent {
+  const factory Pause() = _$PauseImpl;
+}
+
+/// @nodoc
 mixin _$MusicPlayerState {
   PanelController get panelController => throw _privateConstructorUsedError;
   PlayerPanelStatus get playerPanelStatus => throw _privateConstructorUsedError;
   MusicPlayerStatus get musicPlayerStatus => throw _privateConstructorUsedError;
+  AudioPlayer get audioPlayer => throw _privateConstructorUsedError;
+  Song? get song => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MusicPlayerStateCopyWith<MusicPlayerState> get copyWith =>
@@ -422,7 +603,11 @@ abstract class $MusicPlayerStateCopyWith<$Res> {
   $Res call(
       {PanelController panelController,
       PlayerPanelStatus playerPanelStatus,
-      MusicPlayerStatus musicPlayerStatus});
+      MusicPlayerStatus musicPlayerStatus,
+      AudioPlayer audioPlayer,
+      Song? song});
+
+  $SongCopyWith<$Res>? get song;
 }
 
 /// @nodoc
@@ -441,6 +626,8 @@ class _$MusicPlayerStateCopyWithImpl<$Res, $Val extends MusicPlayerState>
     Object? panelController = null,
     Object? playerPanelStatus = null,
     Object? musicPlayerStatus = null,
+    Object? audioPlayer = null,
+    Object? song = freezed,
   }) {
     return _then(_value.copyWith(
       panelController: null == panelController
@@ -455,7 +642,27 @@ class _$MusicPlayerStateCopyWithImpl<$Res, $Val extends MusicPlayerState>
           ? _value.musicPlayerStatus
           : musicPlayerStatus // ignore: cast_nullable_to_non_nullable
               as MusicPlayerStatus,
+      audioPlayer: null == audioPlayer
+          ? _value.audioPlayer
+          : audioPlayer // ignore: cast_nullable_to_non_nullable
+              as AudioPlayer,
+      song: freezed == song
+          ? _value.song
+          : song // ignore: cast_nullable_to_non_nullable
+              as Song?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SongCopyWith<$Res>? get song {
+    if (_value.song == null) {
+      return null;
+    }
+
+    return $SongCopyWith<$Res>(_value.song!, (value) {
+      return _then(_value.copyWith(song: value) as $Val);
+    });
   }
 }
 
@@ -470,7 +677,12 @@ abstract class _$$MusicPlayerStateImplCopyWith<$Res>
   $Res call(
       {PanelController panelController,
       PlayerPanelStatus playerPanelStatus,
-      MusicPlayerStatus musicPlayerStatus});
+      MusicPlayerStatus musicPlayerStatus,
+      AudioPlayer audioPlayer,
+      Song? song});
+
+  @override
+  $SongCopyWith<$Res>? get song;
 }
 
 /// @nodoc
@@ -487,6 +699,8 @@ class __$$MusicPlayerStateImplCopyWithImpl<$Res>
     Object? panelController = null,
     Object? playerPanelStatus = null,
     Object? musicPlayerStatus = null,
+    Object? audioPlayer = null,
+    Object? song = freezed,
   }) {
     return _then(_$MusicPlayerStateImpl(
       panelController: null == panelController
@@ -501,6 +715,14 @@ class __$$MusicPlayerStateImplCopyWithImpl<$Res>
           ? _value.musicPlayerStatus
           : musicPlayerStatus // ignore: cast_nullable_to_non_nullable
               as MusicPlayerStatus,
+      audioPlayer: null == audioPlayer
+          ? _value.audioPlayer
+          : audioPlayer // ignore: cast_nullable_to_non_nullable
+              as AudioPlayer,
+      song: freezed == song
+          ? _value.song
+          : song // ignore: cast_nullable_to_non_nullable
+              as Song?,
     ));
   }
 }
@@ -511,7 +733,9 @@ class _$MusicPlayerStateImpl implements _MusicPlayerState {
   const _$MusicPlayerStateImpl(
       {required this.panelController,
       required this.playerPanelStatus,
-      required this.musicPlayerStatus});
+      required this.musicPlayerStatus,
+      required this.audioPlayer,
+      this.song});
 
   @override
   final PanelController panelController;
@@ -519,10 +743,14 @@ class _$MusicPlayerStateImpl implements _MusicPlayerState {
   final PlayerPanelStatus playerPanelStatus;
   @override
   final MusicPlayerStatus musicPlayerStatus;
+  @override
+  final AudioPlayer audioPlayer;
+  @override
+  final Song? song;
 
   @override
   String toString() {
-    return 'MusicPlayerState(panelController: $panelController, playerPanelStatus: $playerPanelStatus, musicPlayerStatus: $musicPlayerStatus)';
+    return 'MusicPlayerState(panelController: $panelController, playerPanelStatus: $playerPanelStatus, musicPlayerStatus: $musicPlayerStatus, audioPlayer: $audioPlayer, song: $song)';
   }
 
   @override
@@ -535,12 +763,15 @@ class _$MusicPlayerStateImpl implements _MusicPlayerState {
             (identical(other.playerPanelStatus, playerPanelStatus) ||
                 other.playerPanelStatus == playerPanelStatus) &&
             (identical(other.musicPlayerStatus, musicPlayerStatus) ||
-                other.musicPlayerStatus == musicPlayerStatus));
+                other.musicPlayerStatus == musicPlayerStatus) &&
+            (identical(other.audioPlayer, audioPlayer) ||
+                other.audioPlayer == audioPlayer) &&
+            (identical(other.song, song) || other.song == song));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, panelController, playerPanelStatus, musicPlayerStatus);
+  int get hashCode => Object.hash(runtimeType, panelController,
+      playerPanelStatus, musicPlayerStatus, audioPlayer, song);
 
   @JsonKey(ignore: true)
   @override
@@ -552,10 +783,11 @@ class _$MusicPlayerStateImpl implements _MusicPlayerState {
 
 abstract class _MusicPlayerState implements MusicPlayerState {
   const factory _MusicPlayerState(
-          {required final PanelController panelController,
-          required final PlayerPanelStatus playerPanelStatus,
-          required final MusicPlayerStatus musicPlayerStatus}) =
-      _$MusicPlayerStateImpl;
+      {required final PanelController panelController,
+      required final PlayerPanelStatus playerPanelStatus,
+      required final MusicPlayerStatus musicPlayerStatus,
+      required final AudioPlayer audioPlayer,
+      final Song? song}) = _$MusicPlayerStateImpl;
 
   @override
   PanelController get panelController;
@@ -563,6 +795,10 @@ abstract class _MusicPlayerState implements MusicPlayerState {
   PlayerPanelStatus get playerPanelStatus;
   @override
   MusicPlayerStatus get musicPlayerStatus;
+  @override
+  AudioPlayer get audioPlayer;
+  @override
+  Song? get song;
   @override
   @JsonKey(ignore: true)
   _$$MusicPlayerStateImplCopyWith<_$MusicPlayerStateImpl> get copyWith =>
