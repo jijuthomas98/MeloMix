@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:melomix/features/auth/logic/auth_bloc.dart';
@@ -44,6 +46,14 @@ class Melomix extends StatelessWidget {
               themeMode: ThemeMode.dark,
               routerConfig: routerConfig,
               debugShowCheckedModeBanner: false,
+              scrollBehavior: const MaterialScrollBehavior().copyWith(
+                dragDevices: {
+                  PointerDeviceKind.mouse,
+                  PointerDeviceKind.touch,
+                  PointerDeviceKind.stylus,
+                  PointerDeviceKind.unknown
+                },
+              ),
             ),
           ),
         ),

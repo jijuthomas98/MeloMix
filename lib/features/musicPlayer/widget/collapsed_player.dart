@@ -7,7 +7,7 @@ class CollapsedPlayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.amber,
-      child: Text('Mini player'),
+      child: const Text('Mini player'),
     );
   }
 }

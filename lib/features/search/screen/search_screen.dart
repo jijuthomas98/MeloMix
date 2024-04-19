@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:melomix/features/search/data/enums.dart';
 import 'package:melomix/features/search/logic/search_bloc.dart';
-import 'package:melomix/features/search/screen/widget/search_and_filter_persistent_delegate.dart';
+import 'package:melomix/features/search/screen/widget/search_appbar.dart';
 import 'package:melomix/features/search/screen/widget/song_item_widget.dart';
-import 'package:melomix/utils/extensions/extensions.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -12,31 +11,21 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: SearchAndFilterHeaderPersistentDelegate(
-                padding: context.padding,
-              ),
-            ),
-            BlocBuilder<SearchBloc, SearchState>(
-              builder: (context, state) {
-                if (state.songs.isNotEmpty &&
-                    state.searchFilter == SearchFilter.songs) {
-                  return SliverList.builder(
-                    itemCount: state.songs.length,
-                    itemBuilder: (context, index) {
-                      return SongItemWidget(song: state.songs[index]);
-                    },
-                  );
-                }
-                return const SliverToBoxAdapter(child: Text('data'));
+      extendBodyBehindAppBar: true,
+      appBar: const SearchAppBar(),
+      body: BlocBuilder<SearchBloc, SearchState>(
+        builder: (context, state) {
+          if (state.songs.isNotEmpty &&
+              state.searchFilter == SearchFilter.songs) {
+            return ListView.builder(
+              itemCount: state.songs.length,
+              itemBuilder: (context, index) {
+                return SongItemWidget(song: state.songs[index]);
               },
-            )
-          ],
-        ),
+            );
+          }
+          return Text('data');
+        },
       ),
     );
   }
