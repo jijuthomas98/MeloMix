@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:melomix/features/core/data/model/song/song.dart';
+import 'package:melomix/features/musicPlayer/logic/music_player_bloc.dart';
 import 'package:melomix/utils/extensions/extensions.dart';
 
 class SongItemWidget extends StatelessWidget {
@@ -13,6 +15,9 @@ class SongItemWidget extends StatelessWidget {
       leading: _buildLeading(),
       title: _buildTitle(context),
       subtitle: _buildSubtitle(context),
+      onTap: () {
+        context.read<MusicPlayerBloc>().add(Play(song: song));
+      },
     );
   }
 

@@ -47,4 +47,34 @@ class Song with _$Song {
         image?.where((image) => image.quality == "500x500").first;
     return highQualityImage?.url;
   }
+
+  String? get12KbpsDownloadUrl() {
+    var filteredDownloadUrl =
+        downloadUrl.where((url) => url.quality == "12kbps").first;
+    return filteredDownloadUrl.url;
+  }
+
+  String? get48KbpsDownloadUrl() {
+    var filteredDownloadUrl =
+        downloadUrl.where((url) => url.quality == "48kbps").first;
+    return filteredDownloadUrl.url;
+  }
+
+  String? get96KbpsDownloadUrl() {
+    var filteredDownloadUrl =
+        downloadUrl.where((url) => url.quality == "96kbps").first;
+    return filteredDownloadUrl.url;
+  }
+
+  String? get160KbpsDownloadUrl() {
+    var filteredDownloadUrl =
+        downloadUrl.where((url) => url.quality == "160kbps").first;
+    return filteredDownloadUrl.url;
+  }
+
+  String? get320KbpsDownloadUrl() {
+    var filteredDownloadUrl =
+        downloadUrl.where((url) => url.quality == "320kbps").first;
+    return filteredDownloadUrl.url;
+  }
 }
